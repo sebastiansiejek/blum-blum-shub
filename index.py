@@ -1,1 +1,1 @@
-from includes.isPrime import isPrime
+from utils.printPrimeNumbers import printPrimeNumbers
