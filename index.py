@@ -1,1 +1,3 @@
-from utils.printPrimeNumbers import printPrimeNumbers
+from BBS import BBS
+
+BBS(9967, 9967)
