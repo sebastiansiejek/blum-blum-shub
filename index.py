@@ -1,3 +1,3 @@
 from BBS import BBS
 
-BBS(9967, 9967)
+print(BBS(7, 11).printBits(20000))
