@@ -31,7 +31,7 @@ class BBS:
     def setQ(self, q):
         self.q = q
 
-    def printBits(self, amount):
+    def generateBits(self, amount):
         array = []
         amount += 1
         for i in range(amount):
