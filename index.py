@@ -1,3 +1,6 @@
 from BBS import BBS
+from Tests import Tests
 
-print(BBS(7, 11).printBits(20000))
+bits = BBS(7, 11)
+bits = bits.generateBits(20000)
+print('bits1: ', Tests().series(bits))

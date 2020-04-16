@@ -8,35 +8,66 @@ class BBS:
     p = 0
     q = 0
     n = 0
+    seed = 0
+    generatedValues = []
 
     def __init__(self, p, q):
         self.setP(p)
         self.setQ(q)
-        if(isPrime(self.p) and isCongruentNumber(self.p) and isPrime(self.q) and isCongruentNumber(self.q)):
+        if(self.p > 0 and self.q > 0):
             self.__setN()
+            self.__setSeed()
+
+    def setP(self, p):
+        if(not self.__checkParams(p)):
+            self.p = p
+
+    def setQ(self, q):
+        if(not self.__checkParams(q)):
+            self.q = q
+
+    def __checkParams(self, number):
+        isError = False
+        if(not isPrime(number)):
+            print(number, 'is not prime')
+            isError = True
+
+        return isError
 
     def __setN(self):
         self.n = self.p * self.q
 
+    def __setSeed(self):
+        while(not coprime(self.n, self.seed) and self.seed < 1):
+            self.seed = randint(0, self.n - 1)
+
     def __generateValue(self):
-        x = 1
-        while (coprime(self.n, x) and self.n >= 1):
-            x = randint(0, self.n)
-        powX = pow(x, 2)
-        return powX % self.n
+        if(self.p > 0 and self.q > 0):
+            x = 0
+            while (not coprime(self.n, x)):
+                x = randint(0, self.n)
+            return pow(x, 2) % self.n
 
-    def setP(self, p):
-        self.p = p
+    def generateBits(self, amount):
+        if(self.p == self.q):
+            print('p should be diffrent than q')
+            return False
 
-    def setQ(self, q):
-        self.q = q
+        if (self.n == 0):
+            print('N is equal 0')
+            return False
 
-    def printBits(self, amount):
-        array = []
-        amount += 1
-        for i in range(amount):
-            if(self.__generateValue() % 2 == 0):
-                array.append(0)
-            else:
-                array.append(1)
-        return array
+        else:
+            bitsArray = []
+            amount += 1
+
+            for i in range(amount):
+                generatedValue = self.__generateValue()
+                self.generatedValues.append(generatedValue)
+
+                if(generatedValue % 2 == 0):
+                    bitsArray.append(0)
+                else:
+                    bitsArray.append(1)
+
+            return bitsArray
